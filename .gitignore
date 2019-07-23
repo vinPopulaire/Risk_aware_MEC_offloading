@@ -1,0 +1,14 @@
+/env
+/tags
+/plots
+/saved_runs
+.*.swp
+*.swp
+*.egg-info
+*.pot
+*.py[co]
+__pycache__
+.idea/
+.dev.yaml
+
+/.cache
