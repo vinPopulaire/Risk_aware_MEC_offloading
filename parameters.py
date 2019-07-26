@@ -27,13 +27,17 @@ def set_parameters(case):
     N: int
         Number of users
     bn: 1-D array
-        Each column represents the amount of data a user has.
+        Amount of data a user has
     dn: 1-D array
-        Each column represents the cycles each user's job needs.
+        Cycles each user's job needs
     fn: 1-D array
-        Each column represents the computational capability of the user
+        Computational capability of the user
     gn: 1-D array
-        Each column represents the coefficient denoting the consumed energy per cycle locally
+        Coefficient denoting the consumed energy per cycle locally
+    tn: 1-D array
+        Time to process the data locally by each user
+    en: 1-D array
+        Energy to process the data locally by each user
     e1: float
         Error for user offloading convergence
     an: float
