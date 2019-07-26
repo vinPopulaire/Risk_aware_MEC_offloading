@@ -60,6 +60,8 @@ def set_parameters(case):
     # we want that c is less than the equation so we set it equal to to equation * 1/2
     c = 1/2 * bn/dn * (1 - (1/(tn*en)))
 
+    assert c.all() > 0, "c should be positive"
+
     return locals()
 
 def load_parameters():
