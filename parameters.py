@@ -42,6 +42,8 @@ def set_parameters(case):
         Error for user offloading convergence
     an: float
         Parameter of prospect theory utility
+    kn: float
+        Weighting factor that captures sensitivity of players toward losses as compared to gains
     c: 1-D array
         Each column repesents the pricing factor for each user
     '''
@@ -50,6 +52,7 @@ def set_parameters(case):
     e1 = 1e-03
 
     an = 0.5
+    kn = 1.2
 
     if case["users"] == "homo":
         bn = 5*1e6 * np.ones(N)
