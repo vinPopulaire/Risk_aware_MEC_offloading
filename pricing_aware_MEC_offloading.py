@@ -26,6 +26,8 @@ def main(params):
         # find cost set by the MEC server to each user
         costs = set_costs(b, **params)
 
+        b = play_offloading_game(b, costs, **params)
+
         # check if the game has reached a Nash equilibrium
         converged = game_converged(b, b_old, **params)
 
