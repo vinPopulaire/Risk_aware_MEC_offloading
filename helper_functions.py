@@ -19,6 +19,9 @@ def initialize(N, **params):
 
     b: 1-D array
         Each column represents the amount of data a user wants to offload to the MEC server.
+    b_old: 1-D array
+        Each column represents the amount of data a user wanted to offload on the previous round
+        to the MEC server.
     '''
 
     b = 0.5 * np.ones(N)
