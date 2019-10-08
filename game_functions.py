@@ -3,28 +3,41 @@ Game theory functions
 '''
 
 import numpy as np
-from scipy.optimize import fmin
+from scipy.optimize import fminbound
 import math
+import matplotlib.pyplot as plt
+import pdb
+import time
 
 
-def play_offloading_game(b, costs, bn, dn, an, kn, c, tn, en, **params):
-
-    # sum of all responses
-    B = np.sum(b)
-    Bn = np.sum(bn)
-    Dn = np.sum(dn)
-
-    # Best response of all users except the user
-    B_minus_u = B - b
-    Bn_minus_u = Bn - bn
-    Dn_minus_u = Dn - dn
+def play_offloading_game(b, bn, dn, an, kn, c, tn, en, **params):
 
     b_new = np.empty_like(b)
 
+    N = 10000
+    plt.figure(figsize=(40.0, 30.0))
+
     for i in range(len(b)):
         # find best response of each one based on utility
-        b_new[i] = fmin(utility_function, 0, args=(Dn_minus_u[i], B_minus_u[i], Bn_minus_u[i], dn[i], bn[i], an, kn, c[i], tn[i], en[i]), disp=False)
+        b_new[i] = fminbound(utility_function, 0, bn[i], args=(i, b, dn, bn, an, kn, c, tn, en), disp=False)
 
+        x = np.linspace(0, bn[i], N)
+        res = np.empty_like(x)
+
+        for j in range(len(x)):
+            res[j] = -utility_function(x[j], i, b, dn, bn, an, kn, c, tn, en)
+
+        plt.subplot(5,1,i+1)
+        plt.plot(x, res)
+
+        kati = np.argmax(res)
+        print(res)
+        print(x[kati])
+        print(b_new[i])
+        # pdb.set_trace()
+        print()
+
+    plt.show(block=False)
     # print(b)
     # print(b_new)
 
@@ -56,16 +69,21 @@ def game_converged(b, b_old, e1, **params):
         return True
     return False
 
-def utility_function(b, Dn_minus_u, B_minus_u, Bn_minus_u, dn, bn, an, kn, c, tn, en):
-    # ATTENTION here all variables are single values and not np.arrays
+def utility_function(x, i, b, dn, bn, an, kn, c, tn, en):
+    # ATTENTION here all variables are np.arrays
+    # EXCEPT from x and i which are single values
 
-    dt = ((Dn_minus_u + dn) * (B_minus_u + b) / (Bn_minus_u + bn)) / (Dn_minus_u + dn)
+    # replace user's i offloading value
+    b_replaced = np.copy(b)
+    b_replaced[i] = x
+
+    dt = np.sum(dn*b_replaced/bn) / np.sum(dn)
 
     Pr = dt**2
 
-    ROR = (2-math.exp(dt-1) - 1/(tn*en) - c*dn/bn)**an
+    ROR = (2-math.exp(dt-1) - 1/(tn[i]*en[i]) - c[i]*dn[i]/bn[i])**an
 
-    expected_utility = b**an * (ROR * (1 - Pr) - kn * (1/(tn*en) + c*dn/bn)**an * Pr)
+    expected_utility = x**an * (ROR * (1 - Pr) - kn * (1/(tn[i]*en[i]) + c[i]*dn[i]/bn[i])**an * Pr)
 
     # return minus the utility because we will to use a minimization optimization even
     # though we want to maximize the utility
