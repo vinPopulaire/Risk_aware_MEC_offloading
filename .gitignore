@@ -12,3 +12,6 @@ __pycache__
 .dev.yaml
 
 /.cache
+
+/to_share
+/checking
