@@ -43,6 +43,8 @@ for repetition in range(1):
 
     # Run main simulation
     results = main(params)
+    # check_all_parameters(**params)
+    # check_best_parameters(**params)
 
     end = time.time()
     running_time = end - start

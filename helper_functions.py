@@ -26,7 +26,7 @@ def initialize(N, **params):
         to the MEC server.
     '''
 
-    b = 3000000 * np.ones(N)
+    b = 0 * np.ones(N)
 
     # set b_old different to b so that we don't falsely converge
     b_old = 1 * np.ones(N)
@@ -60,10 +60,11 @@ def set_costs(b, bn, dn, c, **params):
 
     return costs
 
-def check_game(bn, dn, an, kn, c, tn, en, **params):
+def check_all_parameters(bn, dn, an, kn, c, tn, en, **params):
 
     working = 0
-    for an1 in np.linspace(0.2, 1, 9):
+    eps = 10
+    for an1 in np.linspace(0.3, 1, 8):
         an = an1
 
         for kn1 in np.linspace(0.1, 2, 10):
@@ -71,72 +72,87 @@ def check_game(bn, dn, an, kn, c, tn, en, **params):
             working += 1
             print(working)
 
-            # for dn1 in np.linspace(1, 10, 10):
-            #     dn = dn1 * 1e9 * np.ones(params["N"])
+            for dn1 in np.linspace(1, 10, 10):
+                dn = dn1 * 1e9 * np.ones(params["N"])
 
-            #     for fn1 in np.linspace(1, 10, 10):
-            #         fn = fn1 * 1e9 * np.ones(params["N"])
-            #         tn = dn/fn
+                for fn1 in np.linspace(1, 10, 10):
+                    fn = fn1 * 1e9 * np.ones(params["N"])
+                    tn = dn/fn
 
-            #         for gn1 in np.linspace(1, 10, 10):
-            #             gn = gn1 * 1e-9 * np.ones(params["N"])
-            #             en = gn * dn
+                    for gn1 in np.linspace(1, 10, 10):
+                        gn = gn1 * 1e-9 * np.ones(params["N"])
+                        en = gn * dn
 
-            for bn1 in np.linspace(1, 10, 10):
-                bn = bn1 * 1e6 * np.ones(params["N"])
+                        for bn1 in np.linspace(1, 10, 10):
+                            bn = bn1 * 1e6 * np.ones(params["N"])
 
-                for c1 in np.linspace(2e-1, 9e-1, 8):
-                    c = c1 * bn/dn * (1 - (1/(tn*en)))
+                            for c1 in np.linspace(2e-1, 9e-1, 8):
+                                c = c1 * bn/dn * (1 - (1/(tn*en)))
 
-                    if c.all() > 0:
+                                if c.all() > 0:
 
-                        N = 10000
+                                    counter = 0
 
-                        # fig, ax = plt.subplots(11,1)
+                                    for i, value in enumerate(np.linspace(0,bn[0],11)):
 
-                        counter = 0
+                                        b_others = value * np.ones(5)
 
-                        for i, value in enumerate(np.linspace(0,bn[0],11)):
-                            b_others = value * np.ones(5)
+                                        res = fminbound(utility_function, 0, bn[0], args=(0, b_others, dn, bn, an, kn, c, tn, en), disp=False)
+                                        result_utility = -utility_function(res, 0, b_others, dn, bn, an, kn, c, tn, en)
 
-                            x = np.linspace(0, bn[0], N)
-                            res = np.empty_like(x)
+                                        if (res > eps) and (res <  bn[0] - eps) and (np.isfinite(result_utility)):
+                                            counter += 1
 
-                            for j in range(len(x)):
-                                res[j] = -utility_function(x[j], 0, b_others, dn, bn, an, kn, c, tn, en)
+                                    if counter > 8:
+                                        my_string = ("Counter: " + str(counter) + "\n" +
+                                            "an: " + str(an) +
+                                            " kn: " + str(kn) +
+                                            " bn: " + str(bn1) +
+                                            " dn: " + str(dn1) +
+                                            " fn: " + str(fn1) +
+                                            " gn: " + str(gn1) +
+                                            " c: " + str(c1) + "\n")
 
-                            if (res[0] < res[1]) and (res[-2] > res[-1]):
-                                counter += 1
+                                        with open('result.txt' , 'a') as writer:
+                                            writer.write(my_string)
 
-                            # plt.subplot(11,1,i+1)
-                            # plt.suptitle("an: " + str(an) +
-                            #         " bn: " + str(bn[0]) +
-                            #         " dn: " + str(dn[0]) +
-                            #         " kn: " + str(kn) +
-                            #         " tn: " + str(tn[0]) +
-                            #         " en: " + str(en[0]) +
-                            #         " c: " + str(c), fontsize=6)
-                            # plt.plot(x, res)
+    return "Done"
 
-                        if counter > 8:
-                            my_string = ("Counter: " + str(counter) + "\n" +
-                                "an: " + str(an) +
-                                " bn: " + str(bn[0]) +
-                                " dn: " + str(dn[0]) +
-                                " kn: " + str(kn) +
-                                " tn: " + str(tn[0]) +
-                                " en: " + str(en[0]) +
-                                " c: " + str(c1) + "\n")
+def check_best_parameters(bn, dn, an, kn, c, tn, en, **params):
 
-                            with open('result.txt' , 'a') as writer:
-                                writer.write(my_string)
+    N = 10000
 
-                            # print(my_string)
+    fig, ax = plt.subplots(11,1)
 
-                            # kati = np.argmax(res)
-                            # print(x[kati])
-                            # print()
+    for i, value in enumerate(np.linspace(0,bn[0],11)):
 
-    # plt.show(block=False)
+        b_others = value * np.ones(5)
+
+        eps = 0.2
+        res = fminbound(utility_function, 0, bn[0], args=(0, b_others, dn, bn, an, kn, c, tn, en), disp=False)
+        result_utility = -utility_function(res, 0, b_others, dn, bn, an, kn, c, tn, en)
+
+        if (res > eps) and (res <  bn[0] - eps) and (np.isfinite(result_utility)):
+            print()
+            print(res)
+            print(result_utility)
+
+        x = np.linspace(0, bn[0], N)
+        res = np.empty_like(x)
+        for j in range(len(x)):
+            res[j] = -utility_function(x[j], 0, b_others, dn, bn, an, kn, c, tn, en)
+
+
+        plt.subplot(11,1,i+1)
+        plt.suptitle("an: " + str(an) +
+                " bn: " + str(bn[0]) +
+                " dn: " + str(dn[0]) +
+                " kn: " + str(kn) +
+                " tn: " + str(tn[0]) +
+                " en: " + str(en[0]) +
+                " c: " + str(c[0]), fontsize=6)
+        plt.plot(x, res)
+
+    plt.show()
 
     return "Done"
