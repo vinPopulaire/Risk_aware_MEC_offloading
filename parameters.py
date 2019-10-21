@@ -49,23 +49,23 @@ def set_parameters(case):
     '''
 
     N = 5
-    e1 = 1e-03
+    e1 = 0.9
 
-    an = 0.5
-    kn = 1.2
+    an = 0.1
+    kn = 0.31
 
     if case["users"] == "homo":
-        bn = 5*1e6 * np.ones(N)
-        dn = 2*1e9 * np.ones(N)
+        bn = 10*1e6 * np.ones(N)
+        dn = 8*1e9 * np.ones(N)
 
-        fn = 1e9 * np.ones(N)
-        gn = 1e-9 * np.ones(N)
+        fn = 6e9 * np.ones(N)
+        gn = 4e-9 * np.ones(N)
 
     tn = dn/fn
     en = gn*dn
 
     # we want that c is less than the equation so we set it equal to to equation * 1/2
-    c = 1/2 * bn/dn * (1 - (1/(tn*en)))
+    c = 0.2 * bn/dn * (1 - (1/(tn*en)))
 
     assert c.all() > 0, "c should be positive"
 
