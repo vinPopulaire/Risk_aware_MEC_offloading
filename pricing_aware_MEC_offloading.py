@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 
 from helper_functions import *
 from game_functions import *
+from create_plots import *
 
 def main(params):
 
@@ -23,13 +24,14 @@ def main(params):
     converged = False
     while not converged:
 
-
         b = play_offloading_game(b, **params)
 
         # check if the game has reached a Nash equilibrium
         converged = game_converged(b, b_old, **params)
 
         b_old = b
+
+    plot_utility_functions(b, **params)
 
     results = {
         "b": b,

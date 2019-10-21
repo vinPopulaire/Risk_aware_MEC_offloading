@@ -14,32 +14,27 @@ def play_offloading_game(b, bn, dn, an, kn, c, tn, en, **params):
 
     b_new = np.empty_like(b)
 
-    N = 10000
-    plt.figure(figsize=(40.0, 30.0))
+    # N = 10000
+    # plt.figure(figsize=(40.0, 30.0))
 
     for i in range(len(b)):
         # find best response of each one based on utility
         b_new[i] = fminbound(utility_function, 0, bn[i], args=(i, b, dn, bn, an, kn, c, tn, en), disp=False)
 
-        x = np.linspace(0, bn[i], N)
-        res = np.empty_like(x)
+        # calculate utility for ploting
+        # x = np.linspace(0, bn[i], N)
+        # res = np.empty_like(x)
 
-        for j in range(len(x)):
-            res[j] = -utility_function(x[j], i, b, dn, bn, an, kn, c, tn, en)
+        # for j in range(len(x)):
+        #     res[j] = -utility_function(x[j], i, b, dn, bn, an, kn, c, tn, en)
 
-        plt.subplot(5,1,i+1)
-        plt.plot(x, res)
+        # plt.subplot(5,1,i+1)
+        # plt.plot(x, res)
 
-        kati = np.argmax(res)
-        print(res)
-        print(x[kati])
-        print(b_new[i])
-        # pdb.set_trace()
-        print()
+    print(b_new)
+    print()
 
-    plt.show(block=False)
-    # print(b)
-    # print(b_new)
+    # plt.show(block=False)
 
     return b_new
 
