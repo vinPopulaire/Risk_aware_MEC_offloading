@@ -29,7 +29,7 @@ def main(params):
         # check if the game has reached a Nash equilibrium
         converged = game_converged(b, b_old, **params)
 
-        b_old = b
+        b_old = b.copy()
 
     plot_utility_functions(b, **params)
 

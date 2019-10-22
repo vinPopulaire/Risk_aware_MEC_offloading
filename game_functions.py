@@ -21,6 +21,8 @@ def play_offloading_game(b, bn, dn, an, kn, c, tn, en, **params):
         # find best response of each one based on utility
         b_new[i] = fminbound(utility_function, 0, bn[i], args=(i, b, dn, bn, an, kn, c, tn, en), disp=False)
 
+        b[i] = b_new[i]
+
         # calculate utility for ploting
         # x = np.linspace(0, bn[i], N)
         # res = np.empty_like(x)
