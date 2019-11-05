@@ -48,10 +48,10 @@ def set_parameters(case):
         Each column repesents the pricing factor for each user
     '''
 
-    N = 5
-    e1 = 0.9
+    N = 25
+    e1 = 1
 
-    an = 0.1
+    an = 0.2
     kn = 0.31
 
     if case["users"] == "homo":
