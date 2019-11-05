@@ -61,6 +61,13 @@ def set_parameters(case):
         fn = 6e9 * np.ones(N)
         gn = 4e-9 * np.ones(N)
 
+    if case["users"] == "hetero":
+        bn = 1e6 * (np.random.randint(10, size=N) + 1)
+        dn = 8*1e9 * np.ones(N)
+
+        fn = 6e9 * np.ones(N)
+        gn = 4e-9 * np.ones(N)
+
     tn = dn/fn
     en = gn*dn
 
