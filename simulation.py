@@ -34,7 +34,7 @@ for repetition in range(1):
     else:
         # Set random parameter in order to generate the same parameters
         print("Generating new parameters")
-        np.random.seed(13)
+        np.random.seed()
         params = set_parameters(case)
 
     N = params['N']
