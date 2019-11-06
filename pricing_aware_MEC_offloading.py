@@ -31,8 +31,6 @@ def main(params):
 
         b_old = b.copy()
 
-    plot_utility_functions(b, **params)
-
     results = {
         "b": b,
         "expected_utility": expected_utility,
