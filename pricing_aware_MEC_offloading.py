@@ -24,7 +24,7 @@ def main(params):
     converged = False
     while not converged:
 
-        b = play_offloading_game(b, **params)
+        b, expected_utility = play_offloading_game(b, **params)
 
         # check if the game has reached a Nash equilibrium
         converged = game_converged(b, b_old, **params)
@@ -35,6 +35,7 @@ def main(params):
 
     results = {
         "b": b,
+        "expected_utility": expected_utility,
             }
 
     return results

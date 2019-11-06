@@ -13,13 +13,14 @@ import time
 def play_offloading_game(b, bn, dn, an, kn, c, tn, en, **params):
 
     b_new = np.empty_like(b)
+    expected_utility = np.empty_like(b)
 
     # N = 10000
     # plt.figure(figsize=(40.0, 30.0))
 
     for i in range(len(b)):
         # find best response of each one based on utility
-        b_new[i] = fminbound(utility_function, 0, bn[i], args=(i, b, dn, bn, an, kn, c, tn, en), disp=False)
+        b_new[i], expected_utility[i], _, _ = fminbound(utility_function, 0, bn[i], args=(i, b, dn, bn, an, kn, c, tn, en), disp=False, full_output=True)
 
         b[i] = b_new[i]
 
@@ -38,7 +39,7 @@ def play_offloading_game(b, bn, dn, an, kn, c, tn, en, **params):
 
     # plt.show(block=False)
 
-    return b_new
+    return b_new, -expected_utility
 
 def game_converged(b, b_old, e1, **params):
     '''
