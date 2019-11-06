@@ -22,9 +22,9 @@ import dill
 # Keep only three decimal places when printing numbers
 np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
 
-case = {"users": "homo"}
+case = {"users": "hetero"}
 
-for repetition in range(1):
+for repetition in range(2):
     print("Repetition no: " + str(repetition+1))
 
     results = {}
@@ -54,3 +54,11 @@ for repetition in range(1):
     if SAVE_PARAMETERS == True:
         save_parameters(params)
 
+    results["time"] = running_time
+    results["repetition"] = repetition
+
+    if SAVE_RESULTS == True:
+        outfile = 'saved_runs/results/individual/' + case["users"] + "_" + str(repetition)
+
+        with open(outfile, 'wb') as fp:
+            dill.dump(results, fp)

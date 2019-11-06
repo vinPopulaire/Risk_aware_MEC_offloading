@@ -9,7 +9,7 @@ SAVE_FIGS = False
 ONE_FIGURE = False
 LOAD_SAVED_PARAMETERS = False
 SAVE_PARAMETERS = False
-SAVE_RESULTS = False
+SAVE_RESULTS = True
 
 def set_parameters(case):
     '''
