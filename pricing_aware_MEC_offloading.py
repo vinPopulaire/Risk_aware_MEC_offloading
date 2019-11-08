@@ -14,7 +14,9 @@ import matplotlib.pyplot as plt
 
 from helper_functions import *
 from game_functions import *
-from create_plots import *
+from plots import *
+
+from parameters import *
 
 def main(params):
 
@@ -22,7 +24,9 @@ def main(params):
     b,b_old = initialize(**params)
 
     converged = False
+
     iterations = 0
+    b_till_convergence = [b]
     while not converged:
 
         b, expected_utility = play_offloading_game(b, **params)
@@ -33,6 +37,9 @@ def main(params):
         b_old = b.copy()
 
         iterations += 1
+        b_till_convergence.append(b)
+
+    if GENERATE_FIGURES: plot_b_till_convergence(b_till_convergence)
 
     results = {
         "b": b,
