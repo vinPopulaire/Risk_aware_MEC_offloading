@@ -37,7 +37,7 @@ def main(params):
     results = {
         "b": b,
         "expected_utility": expected_utility,
-        "iterations": iterations,
+        "iterations": iterations + 1, # add 1 to show the number of iterations
             }
 
     return results
