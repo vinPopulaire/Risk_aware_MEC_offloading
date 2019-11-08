@@ -22,6 +22,7 @@ def main(params):
     b,b_old = initialize(**params)
 
     converged = False
+    iterations = 0
     while not converged:
 
         b, expected_utility = play_offloading_game(b, **params)
@@ -31,9 +32,12 @@ def main(params):
 
         b_old = b.copy()
 
+        iterations += 1
+
     results = {
         "b": b,
         "expected_utility": expected_utility,
+        "iterations": iterations,
             }
 
     return results
