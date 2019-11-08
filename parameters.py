@@ -7,6 +7,7 @@ import dill
 
 SAVE_FIGS = False
 ONE_FIGURE = False
+GENERATE_FIGURES = False
 LOAD_SAVED_PARAMETERS = False
 SAVE_PARAMETERS = False
 SAVE_RESULTS = True
