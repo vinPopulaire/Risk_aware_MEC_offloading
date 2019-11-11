@@ -34,9 +34,6 @@ def play_offloading_game(b, bn, dn, an, kn, c, tn, en, **params):
         # plt.subplot(5,1,i+1)
         # plt.plot(x, res)
 
-    print(b_new)
-    print()
-
     # plt.show(block=False)
 
     return b_new, -expected_utility
