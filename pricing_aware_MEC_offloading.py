@@ -26,7 +26,7 @@ def main(params):
     converged = False
 
     iterations = 0
-    b_till_convergence = [b]
+    b_till_convergence = [b.copy()]
     while not converged:
 
         b, expected_utility = play_offloading_game(b, **params)
