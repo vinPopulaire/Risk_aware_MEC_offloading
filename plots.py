@@ -44,14 +44,14 @@ def setup_plots(suptitle):
 
     return fig, ax
 
-def plot_b_till_convergence(b_till_convergence):
+def plot_b_converging(b_converging):
     '''
     Plot the data each user is trying to offload till convergence
 
     Parameters
     ----------
 
-    b_till_convergence: 2-d array
+    b_converging: 2-d array
     Contains on each row the amount of data each user is trying to offload. Each row is
     a different iteration
 
@@ -60,7 +60,7 @@ def plot_b_till_convergence(b_till_convergence):
     Plot
 
     '''
-    result = b_till_convergence
+    result = b_converging
 
     # Each row on the transposed matrix contains the data the user offloads
     # in each iteration. Different rows mean different user.
@@ -80,7 +80,7 @@ def plot_b_till_convergence(b_till_convergence):
     plt.xlabel('iterations', fontweight='bold')
     plt.ylabel('amount of data (bytes)', fontweight='bold')
 
-    path_name = "b_till_convergence"
+    path_name = "b_converging"
     if SAVE_FIGS == True and ONE_FIGURE == False:
         plt.savefig("plots/" + path_name + ".png")
     else:

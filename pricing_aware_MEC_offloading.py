@@ -26,7 +26,7 @@ def main(params):
     converged = False
 
     iterations = 0
-    b_till_convergence = [b.copy()]
+    b_converging = [b.copy()]
     while not converged:
 
         b, expected_utility = play_offloading_game(b, **params)
@@ -37,9 +37,9 @@ def main(params):
         b_old = b.copy()
 
         iterations += 1
-        b_till_convergence.append(b)
+        b_converging.append(b.copy())
 
-    if GENERATE_FIGURES: plot_b_till_convergence(b_till_convergence)
+    if GENERATE_FIGURES: plot_b_converging(b_converging)
 
     results = {
         "b": b,
