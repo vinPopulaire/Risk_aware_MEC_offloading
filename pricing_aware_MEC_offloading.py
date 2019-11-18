@@ -29,7 +29,14 @@ def main(params):
     b_converging = [b.copy()]
     while not converged:
 
-        b, expected_utility = play_offloading_game(b, **params)
+        # if constant offloading, just calculate the expected utility for the specified offloading amount
+        if CONSTANT_OFFLOADING:
+            expected_utility = np.empty_like(b)
+            for i in range(len(b)):
+                expected_utility[i] = -utility_function(b[i], i, b, params["dn"], params["bn"],params["an"], params["kn"], params["c"], params["tn"], params["en"])
+            b_old = b.copy() # to converge
+        else:
+            b, expected_utility = play_offloading_game(b, **params)
 
         # check if the game has reached a Nash equilibrium
         converged = game_converged(b, b_old, **params)

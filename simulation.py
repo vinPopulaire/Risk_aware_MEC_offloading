@@ -58,7 +58,11 @@ for repetition in range(1):
     results["repetition"] = repetition
 
     if SAVE_RESULTS == True:
-        outfile = 'saved_runs/results/individual/' + case["users"] + "_" + str(repetition)
+        if CONSTANT_OFFLOADING:
+            constant_str = "_b_constant_" + str(int(results["b"][0]/1e6)) + "_"
+        else:
+            constant_str = ""
+        outfile = 'saved_runs/results/individual/' + case["users"] + constant_str + "_N_" + str(N) + "_" + str(repetition)
 
         with open(outfile, 'wb') as fp:
             dill.dump(results, fp)

@@ -13,6 +13,8 @@ SAVE_PARAMETERS = False
 SAVE_RESULTS = True
 
 def set_parameters(case):
+CONSTANT_OFFLOADING = False
+
     '''
     Sets the parameters used in the simulation
 
