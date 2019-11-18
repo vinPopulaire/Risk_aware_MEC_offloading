@@ -26,16 +26,16 @@ def initialize(N, **params):
         to the MEC server.
     '''
 
-    b = 0 * np.ones(N)
+    b = 0*1e6 * np.ones(N)
 
     # set b_old different to b so that we don't falsely converge
     b_old = 1 * np.ones(N)
 
     return b, b_old
 
-def set_costs(b, bn, dn, c, **params):
+def calculate_costs(b, bn, dn, c, **params):
     '''
-    Set costs imposed by the MEC server to each user
+    Calcuate costs imposed by the MEC server to each user
 
     Parameters
     ----------

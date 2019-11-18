@@ -77,6 +77,9 @@ def plot_b_converging(b_converging):
         #     line = plt.plot(row, lw=5)
         line = plt.plot(row, lw=5)
 
+    average = np.mean(result, axis=0)
+    line = plt.plot(average, '--', lw=5, color='black')
+
     plt.xlabel('iterations', fontweight='bold')
     plt.ylabel('amount of data (bytes)', fontweight='bold')
 
@@ -84,4 +87,94 @@ def plot_b_converging(b_converging):
     if SAVE_FIGS == True and ONE_FIGURE == False:
         plt.savefig("plots/" + path_name + ".png")
     else:
-        plt.show()
+        plt.show(block=False)
+
+def plot_expected_utility_converging(expected_utility_converging):
+    '''
+    Plot the expected utility of each user till convergence
+
+    Parameters
+    ----------
+
+    expected_utility_converging: 2-d array
+    Contains on each row the expected utility of each user. Each row is
+    a different iteration
+
+    Returns
+    -------
+    Plot
+
+    '''
+    result = expected_utility_converging
+
+    # Each row on the transposed matrix contains the data the user offloads
+    # in each iteration. Different rows mean different user.
+    result = np.transpose(result)
+
+    suptitle = "Expected utility of each user in each iteration"
+
+    if ONE_FIGURE == False:
+        fig, ax = setup_plots(suptitle)
+
+    for index, row in enumerate(result):
+        # # display only some of the users on the plot
+        # if index%11 == 0:
+        #     line = plt.plot(row, lw=5)
+        line = plt.plot(row, lw=5)
+
+    average = np.mean(result, axis=0)
+    line = plt.plot(average, '--', lw=5, color='black')
+
+    plt.xlabel('iterations', fontweight='bold')
+    plt.ylabel('expected utility', fontweight='bold')
+
+    path_name = "expected_utility"
+    if SAVE_FIGS == True and ONE_FIGURE == False:
+        plt.savefig("plots/" + path_name + ".png")
+    else:
+        plt.show(block=False)
+
+def plot_pricing_converging(pricing_converging):
+    '''
+    Plot the pricing set for each user till convergence
+
+    Parameters
+    ----------
+
+    pricing_converging: 2-d array
+    Contains on each row the pricing for each user. Each row is
+    a different iteration
+
+    Returns
+    -------
+    Plot
+
+    '''
+    result = pricing_converging
+
+    # Each row on the transposed matrix contains the data the user offloads
+    # in each iteration. Different rows mean different user.
+    result = np.transpose(result)
+
+    suptitle = "Pricing each user in each iteration"
+
+    if ONE_FIGURE == False:
+        fig, ax = setup_plots(suptitle)
+
+    for index, row in enumerate(result):
+        # # display only some of the users on the plot
+        # if index%11 == 0:
+        #     line = plt.plot(row, lw=5)
+        line = plt.plot(row, lw=5)
+
+    average = np.mean(result, axis=0)
+    line = plt.plot(average, '--', lw=5, color='black')
+
+    plt.xlabel('iterations', fontweight='bold')
+    plt.ylabel('pricing', fontweight='bold')
+
+    path_name = "pricing"
+    if SAVE_FIGS == True and ONE_FIGURE == False:
+        plt.savefig("plots/" + path_name + ".png")
+    else:
+        plt.show(block=False)

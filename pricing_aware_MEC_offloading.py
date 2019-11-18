@@ -27,13 +27,21 @@ def main(params):
 
     iterations = 0
     b_converging = [b.copy()]
+
+    # to generate the first expected utility
+    expected_utility = np.empty_like(b)
+    for i in range(len(b)):
+        expected_utility[i] = -utility_function(0, i, b, **params)
+    expected_utility_converging = [expected_utility]
+    pricing_converging = [calculate_costs(b, **params)]
+
     while not converged:
 
         # if constant offloading, just calculate the expected utility for the specified offloading amount
         if CONSTANT_OFFLOADING:
             expected_utility = np.empty_like(b)
             for i in range(len(b)):
-                expected_utility[i] = -utility_function(b[i], i, b, params["dn"], params["bn"],params["an"], params["kn"], params["c"], params["tn"], params["en"])
+                expected_utility[i] = -utility_function(b[i], i, b, **params)
             b_old = b.copy() # to converge
         else:
             b, expected_utility = play_offloading_game(b, **params)
@@ -45,8 +53,12 @@ def main(params):
 
         iterations += 1
         b_converging.append(b.copy())
+        expected_utility_converging.append(expected_utility.copy())
+        pricing_converging.append(calculate_costs(b, **params))
 
     if GENERATE_FIGURES: plot_b_converging(b_converging)
+    if GENERATE_FIGURES: plot_expected_utility_converging(expected_utility_converging)
+    if GENERATE_FIGURES: plot_pricing_converging(pricing_converging)
 
     results = {
         "b": b,

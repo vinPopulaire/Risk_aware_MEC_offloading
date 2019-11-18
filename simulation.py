@@ -69,3 +69,6 @@ for N in Ns:
 
             with open(outfile, 'wb') as fp:
                 dill.dump(results, fp)
+
+if GENERATE_FIGURES and not SAVE_FIGS:
+    plt.show()

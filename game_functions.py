@@ -64,7 +64,7 @@ def game_converged(b, b_old, e1, **params):
         return True
     return False
 
-def utility_function(x, i, b, dn, bn, an, kn, c, tn, en):
+def utility_function(x, i, b, dn, bn, an, kn, c, tn, en, **params):
     # ATTENTION here all variables are np.arrays
     # EXCEPT from x and i which are single values
 
