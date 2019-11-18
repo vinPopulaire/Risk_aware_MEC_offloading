@@ -12,9 +12,9 @@ LOAD_SAVED_PARAMETERS = False
 SAVE_PARAMETERS = False
 SAVE_RESULTS = True
 
-def set_parameters(case):
 CONSTANT_OFFLOADING = False
 
+def set_parameters(case, N):
     '''
     Sets the parameters used in the simulation
 
@@ -23,12 +23,12 @@ CONSTANT_OFFLOADING = False
 
     case: dictionary
         Dictionary containing infromation about whether the user homogeneous or heterogeneous
+    N: int
+        Number of users
 
     Returns
     ----------
 
-    N: int
-        Number of users
     bn: 1-D array
         Amount of data a user has
     dn: 1-D array
@@ -51,7 +51,6 @@ CONSTANT_OFFLOADING = False
         Each column repesents the pricing factor for each user
     '''
 
-    N = 25
     e1 = 1
 
     an = 0.2
