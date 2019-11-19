@@ -178,3 +178,40 @@ def plot_pricing_converging(pricing_converging):
         plt.savefig("plots/" + path_name + ".png")
     else:
         plt.show(block=False)
+
+def plot_PoF_converging(PoF_converging):
+    '''
+    Plot the probability of failure of MEC server till convergence
+
+    Parameters
+    ----------
+
+    PoF_converging: 1-d array
+    Contains the probability of failure of the MEC server in each iteration
+
+    Returns
+    -------
+    Plot
+
+    '''
+    result = PoF_converging
+
+    # Each row on the transposed matrix contains the data the user offloads
+    # in each iteration. Different rows mean different user.
+    result = np.transpose(result)
+
+    suptitle = "Probability of failure of MEC server in each iteration"
+
+    if ONE_FIGURE == False:
+        fig, ax = setup_plots(suptitle)
+
+    line = plt.plot(result, lw=5)
+
+    plt.xlabel('iterations', fontweight='bold')
+    plt.ylabel('PoF', fontweight='bold')
+
+    path_name = "PoF"
+    if SAVE_FIGS == True and ONE_FIGURE == False:
+        plt.savefig("plots/" + path_name + ".png")
+    else:
+        plt.show(block=False)

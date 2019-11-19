@@ -60,6 +60,33 @@ def calculate_costs(b, bn, dn, c, **params):
 
     return costs
 
+def calculate_PoF(b, bn, dn, **params):
+    '''
+    Calculate probability of failure of the MEC server
+
+    Parameters
+    ----------
+
+    b: 1-D array
+        Each column represents the amount of data a user wants to offload to the MEC server.
+    bn: 1-D array
+        Each column represents the amount of data a user has.
+    dn: 1-D array
+        Each column represents the cycles each user's job needs.
+
+    Returns
+    -------
+
+    Pr: float
+        The probability of failure of the MEC server
+    '''
+
+    dt = np.sum(dn*b/bn) / np.sum(dn)
+
+    PoF = dt**2
+
+    return PoF
+
 def check_all_parameters(bn, dn, an, kn, c, tn, en, **params):
 
     working = 0

@@ -34,6 +34,7 @@ def main(params):
         expected_utility[i] = -utility_function(0, i, b, **params)
     expected_utility_converging = [expected_utility]
     pricing_converging = [calculate_costs(b, **params)]
+    PoF_converging = [calculate_PoF(b, **params)]
 
     while not converged:
 
@@ -55,10 +56,12 @@ def main(params):
         b_converging.append(b.copy())
         expected_utility_converging.append(expected_utility.copy())
         pricing_converging.append(calculate_costs(b, **params))
+        PoF_converging.append(calculate_PoF(b, **params))
 
     if GENERATE_FIGURES: plot_b_converging(b_converging)
     if GENERATE_FIGURES: plot_expected_utility_converging(expected_utility_converging)
     if GENERATE_FIGURES: plot_pricing_converging(pricing_converging)
+    if GENERATE_FIGURES: plot_PoF_converging(PoF_converging)
 
     results = {
         "b": b,
