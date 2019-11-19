@@ -12,13 +12,18 @@ def setup_plots(suptitle):
 
     '''
     Basic setup of plots so it can be reused on plot functions
+
     Parameters
     ----------
+
     suptitle: string
-    Description of the plot that will appear on the top
+        Description of the plot that will appear on the top
+
     Returns
     -------
+
     Figure and axis matplotlib structs
+
     '''
     fig, ax = plt.subplots(1, 1, figsize=(15, 12))
     fig.suptitle(suptitle)
@@ -52,11 +57,12 @@ def plot_b_converging(b_converging):
     ----------
 
     b_converging: 2-d array
-    Contains on each row the amount of data each user is trying to offload. Each row is
-    a different iteration
+        Contains on each row the amount of data each user is trying to offload. Each row is
+        a different iteration
 
     Returns
     -------
+
     Plot
 
     '''
@@ -97,11 +103,12 @@ def plot_expected_utility_converging(expected_utility_converging):
     ----------
 
     expected_utility_converging: 2-d array
-    Contains on each row the expected utility of each user. Each row is
-    a different iteration
+        Contains on each row the expected utility of each user. Each row is
+        a different iteration
 
     Returns
     -------
+
     Plot
 
     '''
@@ -142,11 +149,12 @@ def plot_pricing_converging(pricing_converging):
     ----------
 
     pricing_converging: 2-d array
-    Contains on each row the pricing for each user. Each row is
-    a different iteration
+        Contains on each row the pricing for each user. Each row is
+        a different iteration
 
     Returns
     -------
+
     Plot
 
     '''
@@ -187,10 +195,11 @@ def plot_PoF_converging(PoF_converging):
     ----------
 
     PoF_converging: 1-d array
-    Contains the probability of failure of the MEC server in each iteration
+        Contains the probability of failure of the MEC server in each iteration
 
     Returns
     -------
+
     Plot
 
     '''
@@ -232,6 +241,7 @@ def plot_explicit_utility_and_pricing_converging(expected_utility_converging, pr
 
     Returns
     -------
+
     Plot
 
     '''
