@@ -62,6 +62,7 @@ def main(params):
     if GENERATE_CONVERGING_FIGURES: plot_expected_utility_converging(expected_utility_converging)
     if GENERATE_CONVERGING_FIGURES: plot_pricing_converging(pricing_converging)
     if GENERATE_CONVERGING_FIGURES: plot_PoF_converging(PoF_converging)
+    if GENERATE_CONVERGING_FIGURES: plot_explicit_utility_and_pricing_converging(expected_utility_converging, pricing_converging)
 
     results = {
         "b": b,

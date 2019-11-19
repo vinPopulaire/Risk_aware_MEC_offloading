@@ -215,3 +215,54 @@ def plot_PoF_converging(PoF_converging):
         plt.savefig("plots/" + path_name + ".png")
     else:
         plt.show(block=False)
+
+def plot_explicit_utility_and_pricing_converging(expected_utility_converging, pricing_converging):
+    '''
+    Plot the average explitic utility and pricing of users till convergence
+
+    Parameters
+    ----------
+
+    expected_utility_converging: 2-d array
+        Contains on each row the expected utility of each user. Each row is
+        a different iteration
+    pricing_converging: 2-d array
+        Contains on each row the pricing for each user. Each row is
+        a different iteration
+
+    Returns
+    -------
+    Plot
+
+    '''
+    result1 = expected_utility_converging
+    result2 = pricing_converging
+
+    # Each row on the transposed matrix contains the data the user offloads
+    # in each iteration. Different rows mean different user.
+    result1 = np.transpose(result1)
+    result2 = np.transpose(result2)
+
+    suptitle = "Average expected utility and expected pricing for each user in each iteration"
+
+    if ONE_FIGURE == False:
+        fig, ax1 = setup_plots(suptitle)
+
+    average1 = np.mean(result1, axis=0)
+    line = plt.plot(average1, lw=5)
+
+    plt.xlabel('iterations', fontweight='bold')
+    plt.ylabel('expected utility', fontweight='bold')
+
+    ax2 = ax1.twinx() # instantiate a second axes that shares the same x-axis
+
+    plt.ylabel('pricing', fontweight='bold')
+
+    average2 = np.mean(result2, axis=0)
+    line = plt.plot(average2, '--', lw=5, color='black')
+
+    path_name = "explicit_utility_and_pricing"
+    if SAVE_FIGS == True and ONE_FIGURE == False:
+        plt.savefig("plots/" + path_name + ".png")
+    else:
+        plt.show(block=False)
