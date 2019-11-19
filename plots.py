@@ -22,13 +22,13 @@ def setup_plots(suptitle):
     '''
     fig, ax = plt.subplots(1, 1, figsize=(15, 12))
     fig.suptitle(suptitle)
-    for item in ([ax.title, ax.xaxis.label, ax.yaxis.label]):
-        item.set_fontsize(30)
-    for item in (ax.get_xticklabels() + ax.get_yticklabels()):
-        item.set_fontsize(26)
-        item.set_fontweight("bold")
-    font = {'weight' : 'bold'}
-    matplotlib.rc('font', **font)
+    # for item in ([ax.title, ax.xaxis.label, ax.yaxis.label]):
+    #     item.set_fontsize(30)
+    # for item in (ax.get_xticklabels() + ax.get_yticklabels()):
+    #     item.set_fontsize(26)
+    #     item.set_fontweight("bold")
+    # font = {'weight' : 'bold'}
+    # matplotlib.rc('font', **font)
 
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
