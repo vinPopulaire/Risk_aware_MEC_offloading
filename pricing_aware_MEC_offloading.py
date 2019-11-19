@@ -58,10 +58,10 @@ def main(params):
         pricing_converging.append(calculate_costs(b, **params))
         PoF_converging.append(calculate_PoF(b, **params))
 
-    if GENERATE_FIGURES: plot_b_converging(b_converging)
-    if GENERATE_FIGURES: plot_expected_utility_converging(expected_utility_converging)
-    if GENERATE_FIGURES: plot_pricing_converging(pricing_converging)
-    if GENERATE_FIGURES: plot_PoF_converging(PoF_converging)
+    if GENERATE_CONVERGING_FIGURES: plot_b_converging(b_converging)
+    if GENERATE_CONVERGING_FIGURES: plot_expected_utility_converging(expected_utility_converging)
+    if GENERATE_CONVERGING_FIGURES: plot_pricing_converging(pricing_converging)
+    if GENERATE_CONVERGING_FIGURES: plot_PoF_converging(PoF_converging)
 
     results = {
         "b": b,
