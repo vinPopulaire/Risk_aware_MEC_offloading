@@ -68,6 +68,12 @@ def main(params):
         "b": b,
         "expected_utility": expected_utility,
         "iterations": iterations + 1, # add 1 to show the number of iterations
+        "pricing": calculate_costs(b, **params) ,
+        "PoF": calculate_PoF(b, **params),
+        "b_converging": b_converging,
+        "expected_utility_converging": expected_utility_converging,
+        "pricing_converging": pricing_converging,
+        "PoF_converging": PoF_converging,
             }
 
     return results
