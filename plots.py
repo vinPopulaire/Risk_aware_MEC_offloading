@@ -225,7 +225,7 @@ def plot_PoF_converging(PoF_converging):
     else:
         plt.show(block=False)
 
-def plot_explicit_utility_and_pricing_converging(expected_utility_converging, pricing_converging):
+def plot_expected_utility_and_pricing_converging(expected_utility_converging, pricing_converging):
     '''
     Plot the average explitic utility and pricing of users till convergence
 
@@ -271,7 +271,7 @@ def plot_explicit_utility_and_pricing_converging(expected_utility_converging, pr
     average2 = np.mean(result2, axis=0)
     line = plt.plot(average2, '--', lw=5, color='black')
 
-    path_name = "explicit_utility_and_pricing"
+    path_name = "expected_utility_and_pricing"
     if SAVE_FIGS == True and ONE_FIGURE == False:
         plt.savefig("plots/" + path_name + ".png")
     else:
