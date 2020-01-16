@@ -25,26 +25,28 @@ np.set_printoptions(formatter={'float': lambda x: "{0:0.3f}".format(x)})
 case = {"users": "homo"}
 # Ns = [1,2,5,10,25,50,75,100]
 Ns = [25]
-cpars = np.linspace(0.1,0.9,33)
-# cpars = [0.5]
+# cpars = np.linspace(0.1,0.9,33)
+cpars = [0.5]
 
 for N in Ns:
+    # Set random parameter in order to generate the same parameters
+    print("Generating new parameters")
+    np.random.seed()
+    params = set_parameters(case, N)
+
+    print("Number of users: " + str(params["N"]))
+
     for cpar in cpars:
+
+        params["cpar"] = cpar
+        params["c"] = cpar * params["bn"]/params["dn"] * (1 - (1/(params["tn"]*params["en"])))
+
+        print("Cost parameter: "+ str(params["cpar"]))
+
         for repetition in range(1):
             print("Repetition no: " + str(repetition+1))
 
             results = {}
-
-            if LOAD_SAVED_PARAMETERS == True:
-                params = load_parameters(cpar)
-            else:
-                # Set random parameter in order to generate the same parameters
-                print("Generating new parameters")
-                np.random.seed()
-                params = set_parameters(case, N, cpar)
-
-            N = params['N']
-            print("Number of users: " + str(N))
 
             start = time.time()
 
@@ -58,8 +60,6 @@ for N in Ns:
             print("Time of simulation:")
             print(running_time)
 
-            if SAVE_PARAMETERS == True:
-                save_parameters(params)
 
             results["time"] = running_time
             results["repetition"] = repetition

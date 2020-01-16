@@ -15,7 +15,7 @@ SAVE_RESULTS = False
 
 CONSTANT_OFFLOADING = False
 
-def set_parameters(case, N, cpar):
+def set_parameters(case, N):
     '''
     Sets the parameters used in the simulation
 
@@ -26,8 +26,6 @@ def set_parameters(case, N, cpar):
         Dictionary containing infromation about whether the user homogeneous or heterogeneous
     N: int
         Number of users
-    cpar: float
-        The parameter used to set the cost for users
 
     Returns
     ----------
@@ -50,6 +48,8 @@ def set_parameters(case, N, cpar):
         Parameter of prospect theory utility
     kn: float
         Weighting factor that captures sensitivity of players toward losses as compared to gains
+    cpar: float
+        The parameter used to set the cost for users
     c: 1-D array
         Each column repesents the pricing factor for each user
     '''
@@ -77,13 +77,14 @@ def set_parameters(case, N, cpar):
     en = gn*dn
 
     # we want that c is less than the equation so we set it equal to to equation * 1/2
+    cpar = 0.5
     c = cpar * bn/dn * (1 - (1/(tn*en)))
 
     assert c.all() > 0, "c should be positive"
 
     return locals()
 
-def load_parameters(cpar):
+def load_parameters():
     '''
     Loads the parameters from a file
 
@@ -98,9 +99,6 @@ def load_parameters(cpar):
 
     with open(infile, 'rb') as in_strm:
         params = dill.load(in_strm)
-
-    params["cpar"] = cpar
-    params["c"] = cpar * params["bn"]/params["dn"] * (1 - (1/(params["tn"]*params["en"])))
 
     return params
 
