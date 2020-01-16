@@ -92,7 +92,7 @@ def load_parameters():
         Dictionary with the paramters of the simulation
     '''
     print("Loading parameters")
-    infile = "runs/parameters/" + "parameters"
+    infile = "saved_runs/parameters/" + "parameters"
 
     with open(infile, 'rb') as in_strm:
         params = dill.load(in_strm)
@@ -109,7 +109,7 @@ def save_parameters(params):
     params: dictionary
         Dictionary with the paramters of the simulation
     '''
-    outfile = "runs/parameters/" + "parameters"
+    outfile = "saved_runs/parameters/" + "parameters"
 
     with open(outfile, 'wb') as fp:
         dill.dump(params, fp)
