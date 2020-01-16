@@ -81,7 +81,8 @@ def calculate_PoF(b, bn, dn, **params):
         The probability of failure of the MEC server
     '''
 
-    dt = np.sum(dn*b/bn) / np.sum(dn)
+    # dt = 1/(1+np.exp(-1.2e-11*np.sum(dn*b/bn)))
+    dt = -1 + 2/(1+np.exp(-2.0e-11*np.sum(dn*b/bn)))
 
     PoF = dt**2
 

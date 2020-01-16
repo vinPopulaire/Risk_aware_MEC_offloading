@@ -72,7 +72,8 @@ def utility_function(x, i, b, dn, bn, an, kn, c, tn, en, **params):
     b_replaced = np.copy(b)
     b_replaced[i] = x
 
-    dt = np.sum(dn*b_replaced/bn) / np.sum(dn)
+    # dt = 1/(1+np.exp(-1.2e-11*np.sum(dn*b_replaced/bn)))
+    dt = -1 + 2/(1+np.exp(-2.0e-11*np.sum(dn*b_replaced/bn)))
 
     Pr = dt**2
 
