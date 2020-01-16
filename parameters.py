@@ -15,7 +15,7 @@ SAVE_RESULTS = False
 
 CONSTANT_OFFLOADING = False
 
-def set_parameters(case, N):
+def set_parameters(case, N, cpar):
     '''
     Sets the parameters used in the simulation
 
@@ -26,6 +26,8 @@ def set_parameters(case, N):
         Dictionary containing infromation about whether the user homogeneous or heterogeneous
     N: int
         Number of users
+    cpar: float
+        The parameter used to set the cost for users
 
     Returns
     ----------
@@ -75,13 +77,13 @@ def set_parameters(case, N):
     en = gn*dn
 
     # we want that c is less than the equation so we set it equal to to equation * 1/2
-    c = 0.2 * bn/dn * (1 - (1/(tn*en)))
+    c = cpar * bn/dn * (1 - (1/(tn*en)))
 
     assert c.all() > 0, "c should be positive"
 
     return locals()
 
-def load_parameters():
+def load_parameters(cpar):
     '''
     Loads the parameters from a file
 
@@ -96,6 +98,9 @@ def load_parameters():
 
     with open(infile, 'rb') as in_strm:
         params = dill.load(in_strm)
+
+    params["cpar"] = cpar
+    params["c"] = cpar * params["bn"]/params["dn"] * (1 - (1/(params["tn"]*params["en"])))
 
     return params
 
