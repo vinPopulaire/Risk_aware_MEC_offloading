@@ -61,6 +61,7 @@ for N in Ns:
             print(running_time)
 
 
+            results["N"] = N
             results["time"] = running_time
             results["repetition"] = repetition
 
