@@ -151,10 +151,17 @@ def check_best_parameters(bn, dn, an, kn, c, tn, en, **params):
     N = 10000
 
     fig, ax = plt.subplots(11,1)
+    plt.suptitle("an: " + str(an) +
+            " bn: " + str(bn[0]) +
+            " dn: " + str(dn[0]) +
+            " kn: " + str(kn) +
+            " tn: " + str(tn[0]) +
+            " en: " + str(en[0]) +
+            " c: " + str(c[0]), fontsize=6)
 
     for i, value in enumerate(np.linspace(0,bn[0],11)):
 
-        b_others = value * np.ones(5)
+        b_others = value * np.ones(params["N"])
 
         eps = 0.2
         res = fminbound(utility_function, 0, bn[0], args=(0, b_others, dn, bn, an, kn, c, tn, en), disp=False)
@@ -172,14 +179,11 @@ def check_best_parameters(bn, dn, an, kn, c, tn, en, **params):
 
 
         plt.subplot(11,1,i+1)
-        plt.suptitle("an: " + str(an) +
-                " bn: " + str(bn[0]) +
-                " dn: " + str(dn[0]) +
-                " kn: " + str(kn) +
-                " tn: " + str(tn[0]) +
-                " en: " + str(en[0]) +
-                " c: " + str(c[0]), fontsize=6)
+        print(x[-1])
+        plt.text(x[-1], res[-1], "others = " + str(value), fontsize=8)
         plt.plot(x, res)
+
+    plt.xlabel('bnMEC', fontweight='normal')
 
     plt.show()
 
