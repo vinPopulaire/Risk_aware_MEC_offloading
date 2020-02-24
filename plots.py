@@ -5,6 +5,9 @@ Plot functions to graphically present simulation results
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
+import matplotlib.lines as mlines
+from mpl_toolkits.axes_grid1 import host_subplot
+import mpl_toolkits.axisartist as AA
 
 from parameters import SAVE_FIGS, ONE_FIGURE
 
@@ -25,14 +28,21 @@ def setup_plots(suptitle):
     Figure and axis matplotlib structs
 
     '''
-    fig, ax = plt.subplots(1, 1, figsize=(15, 12))
-    fig.suptitle(suptitle)
+    plt.rc('font', family='serif')
+    plt.rc('font', size=44)
+    plt.rc('xtick', labelsize='x-small')
+    plt.rc('ytick', labelsize='x-small')
+
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+
+    fig, ax = plt.subplots(1, 1, figsize=(16, 12))
+    # fig.suptitle(suptitle)
     # for item in ([ax.title, ax.xaxis.label, ax.yaxis.label]):
     #     item.set_fontsize(30)
     # for item in (ax.get_xticklabels() + ax.get_yticklabels()):
     #     item.set_fontsize(26)
-    #     item.set_fontweight("bold")
-    # font = {'weight' : 'bold'}
+    #     item.set_fontweight("normal")
+    # font = {'weight' : 'normal'}
     # matplotlib.rc('font', **font)
 
     ax.spines['top'].set_visible(False)
@@ -80,14 +90,18 @@ def plot_b_converging(b_converging):
     for index, row in enumerate(result):
         # # display only some of the users on the plot
         # if index%11 == 0:
-        #     line = plt.plot(row, lw=5)
-        line = plt.plot(row, lw=5)
+        #     line = plt.plot(row, lw=4)
+        line = plt.plot(row, '-', lw=2, color='0.5')
 
     average = np.mean(result, axis=0)
-    line = plt.plot(average, '--', lw=5, color='black')
+    line = plt.plot(average, '-', lw=4, color='black')
 
-    plt.xlabel('iterations', fontweight='bold')
-    plt.ylabel('amount of data (bytes)', fontweight='bold')
+    plt.xlabel('iterations', fontweight='normal')
+    plt.ylabel('Amount of Offloaded Data [bits]', fontweight='normal')
+
+    grey_lines = mlines.Line2D([], [], lw = 2, color='0.5', label='each user')
+    black_line = mlines.Line2D([], [], lw = 4, color='k', label='average')
+    plt.legend(handles=[grey_lines, black_line], loc=1, prop={'size': 24})
 
     path_name = "b_converging"
     if SAVE_FIGS == True and ONE_FIGURE == False:
@@ -126,14 +140,18 @@ def plot_expected_utility_converging(expected_utility_converging):
     for index, row in enumerate(result):
         # # display only some of the users on the plot
         # if index%11 == 0:
-        #     line = plt.plot(row, lw=5)
-        line = plt.plot(row, lw=5)
+        #     line = plt.plot(row, lw=4)
+        line = plt.plot(row, '-', lw=2, color='0.5')
 
     average = np.mean(result, axis=0)
-    line = plt.plot(average, '--', lw=5, color='black')
+    line = plt.plot(average, '-', lw=4, color='k')
 
-    plt.xlabel('iterations', fontweight='bold')
-    plt.ylabel('expected utility', fontweight='bold')
+    plt.xlabel('iterations', fontweight='normal')
+    plt.ylabel("User's Expected Utility", fontweight='normal')
+
+    grey_lines = mlines.Line2D([], [], lw = 2, color='0.5', label='each user')
+    black_line = mlines.Line2D([], [], lw = 4, color='k', label='average')
+    plt.legend(handles=[grey_lines, black_line], loc=1, prop={'size': 24})
 
     path_name = "expected_utility"
     if SAVE_FIGS == True and ONE_FIGURE == False:
@@ -169,17 +187,23 @@ def plot_pricing_converging(pricing_converging):
     if ONE_FIGURE == False:
         fig, ax = setup_plots(suptitle)
 
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(7,7))
+
     for index, row in enumerate(result):
         # # display only some of the users on the plot
         # if index%11 == 0:
-        #     line = plt.plot(row, lw=5)
-        line = plt.plot(row, lw=5)
+        #     line = plt.plot(row, lw=4)
+        line = plt.plot(row, '-', lw=2, color='0.5')
 
     average = np.mean(result, axis=0)
-    line = plt.plot(average, '--', lw=5, color='black')
+    line = plt.plot(average, '-', lw=4, color='k')
 
-    plt.xlabel('iterations', fontweight='bold')
-    plt.ylabel('pricing', fontweight='bold')
+    plt.xlabel('iterations', fontweight='normal')
+    plt.ylabel('Pricing', fontweight='normal')
+
+    grey_lines = mlines.Line2D([], [], lw = 2, color='0.5', label='each user')
+    black_line = mlines.Line2D([], [], lw = 4, color='k', label='average')
+    plt.legend(handles=[grey_lines, black_line], loc=1, prop={'size': 24})
 
     path_name = "pricing"
     if SAVE_FIGS == True and ONE_FIGURE == False:
@@ -214,10 +238,10 @@ def plot_PoF_converging(PoF_converging):
     if ONE_FIGURE == False:
         fig, ax = setup_plots(suptitle)
 
-    line = plt.plot(result, lw=5)
+    line = plt.plot(result, lw=4, color='k')
 
-    plt.xlabel('iterations', fontweight='bold')
-    plt.ylabel('PoF', fontweight='bold')
+    plt.xlabel('iterations', fontweight='normal')
+    plt.ylabel('PoF', fontweight='normal')
 
     path_name = "PoF"
     if SAVE_FIGS == True and ONE_FIGURE == False:
@@ -256,20 +280,34 @@ def plot_expected_utility_and_pricing_converging(expected_utility_converging, pr
     suptitle = "Average expected utility and expected pricing for each user in each iteration"
 
     if ONE_FIGURE == False:
-        fig, ax1 = setup_plots(suptitle)
+        plt.rc('font', family='serif')
+        plt.rc('font', size=44)
+        plt.rc('xtick', labelsize='x-small')
+        plt.rc('ytick', labelsize='x-small')
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+
+        fig = plt.figure(figsize=(16,12))
+
+    host = host_subplot(111, axes_class=AA.Axes)
+    plt.subplots_adjust(right=0.85)
+
+    ax2 = host.twinx() # instantiate a second axes that shares the same x-axis
+    ax2.axis["right"].toggle(all=True)
+    ax2.ticklabel_format(style='sci', axis='y', scilimits=(7,7))
 
     average1 = np.mean(result1, axis=0)
-    line = plt.plot(average1, lw=5)
 
-    plt.xlabel('iterations', fontweight='bold')
-    plt.ylabel('expected utility', fontweight='bold')
+    line = host.plot(average1, '--', lw=4, color='k', label='expected utility')
 
-    ax2 = ax1.twinx() # instantiate a second axes that shares the same x-axis
+    host.set_xlabel('iterations', fontweight='normal')
+    host.set_ylabel('Average Expected Utility', fontweight='normal')
 
-    plt.ylabel('pricing', fontweight='bold')
+    ax2.set_ylabel('Average Pricing', fontweight='normal')
 
     average2 = np.mean(result2, axis=0)
-    line = plt.plot(average2, '--', lw=5, color='black')
+    line = ax2.plot(average2, ':', lw=4, color='0.5', label="pricing")
+
+    host.legend(loc=1, prop={'size': 24})
 
     path_name = "expected_utility_and_pricing"
     if SAVE_FIGS == True and ONE_FIGURE == False:
