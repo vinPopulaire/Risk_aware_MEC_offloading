@@ -57,7 +57,7 @@ def set_parameters(case, N):
     e1 = 1
 
     an = 0.2
-    kn = 0.31
+    kn = 1.2
 
     if case["users"] == "homo":
         bn = 10*1e6 * np.ones(N) + np.random.uniform(-1, 1, size=N) * 1e6
