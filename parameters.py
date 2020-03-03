@@ -52,6 +52,10 @@ def set_parameters(case, N):
         The parameter used to set the cost for users
     c: 1-D array
         Each column repesents the pricing factor for each user
+    fixed_transm_rate : float
+        The transmission rate for offloading 1 bit per second [fixed]
+    fixed_transm_power : float
+        The transmission power used for the transmission [fixed]
     '''
 
     e1 = 1
@@ -81,6 +85,9 @@ def set_parameters(case, N):
     c = cpar * bn/dn * (1 - (1/(tn*en)))
 
     assert c.all() > 0, "c should be positive"
+
+    fixed_transm_rate = 1*1e9
+    fixed_transm_power = 0.1
 
     return locals()
 

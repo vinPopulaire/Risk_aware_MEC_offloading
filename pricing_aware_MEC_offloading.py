@@ -58,6 +58,8 @@ def main(params):
         pricing_converging.append(calculate_costs(b, **params))
         PoF_converging.append(calculate_PoF(b, **params))
 
+    user_energy = calculate_user_energy(b, PoF_converging[-1], **params)
+
     if GENERATE_CONVERGING_FIGURES: plot_b_converging(b_converging)
     if GENERATE_CONVERGING_FIGURES: plot_expected_utility_converging(expected_utility_converging)
     if GENERATE_CONVERGING_FIGURES: plot_pricing_converging(pricing_converging)
@@ -75,6 +77,7 @@ def main(params):
         "expected_utility_converging": expected_utility_converging,
         "pricing_converging": pricing_converging,
         "PoF_converging": PoF_converging,
+        "user_energy": user_energy,
             }
 
     return results

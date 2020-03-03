@@ -88,6 +88,40 @@ def calculate_PoF(b, bn, dn, **params):
 
     return PoF
 
+def calculate_user_energy(b, PoF, bn, dn, en, fixed_transm_rate, fixed_transm_power, **params):
+    '''
+    Calcuate energy that each user expenses based on the offloading chosen
+
+    Parameters
+    ----------
+
+    b: 1-D array
+        Each column represents the amount of data a user wants to offload to the MEC server.
+    bn: 1-D array
+        Each column represents the amount of data a user has.
+    dn: 1-D array
+        Each column represents the cycles each user's job needs.
+    en: 1-D array
+        Energy to process the data locally by each user
+    fixed_transm_rate : float
+        The transmission rate for offloading 1 bit per second [fixed]
+    fixed_transm_power : float
+        The transmission power used for the transmission [fixed]
+
+    Returns
+    -------
+
+    user_energy: 1-D array
+        Each column contains the energy of each user
+    '''
+
+    transmission_power = fixed_transm_power * (b/fixed_transm_rate)
+
+    blocal = bn - b
+    energy = en*PoF + (en*(blocal/bn) + transmission_power)*(1-PoF)
+
+    return energy
+
 def check_all_parameters(bn, dn, an, kn, c, tn, en, **params):
 
     working = 0
