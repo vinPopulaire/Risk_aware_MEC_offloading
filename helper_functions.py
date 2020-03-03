@@ -6,7 +6,7 @@ import numpy as np
 
 from game_functions import *
 
-def initialize(N, **params):
+def initialize(N, bpar, bn, **params):
     '''
     Initialize the probabilities for the simulation
 
@@ -26,7 +26,7 @@ def initialize(N, **params):
         to the MEC server.
     '''
 
-    b = 0*1e6 * np.ones(N)
+    b = bpar * bn
 
     # set b_old different to b so that we don't falsely converge
     b_old = 1 * np.ones(N)

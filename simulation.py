@@ -28,6 +28,9 @@ Ns = [25]
 # cpars = np.linspace(0.1,0.9,33)
 cpars = [0.5]
 
+# if bpars is -1 we don't want constant offloading
+bpars = [-1] if CONSTANT_OFFLOADING else [-1]
+
 for N in Ns:
     # Set random parameter in order to generate the same parameters
     print("Generating new parameters")
@@ -43,37 +46,46 @@ for N in Ns:
 
         print("Cost parameter: "+ str(params["cpar"]))
 
-        for repetition in range(1):
-            print("Repetition no: " + str(repetition+1))
+        while bpars:
+            bpar = bpars.pop()
+            params["bpar"] = bpar
 
-            results = {}
+            # if bpar is -1 then we don't want constant offloading
+            if bpar == -1:
+                CONSTANT_OFFLOADING = False
+                params["bpar"] = 0
 
-            start = time.time()
+            for repetition in range(1):
+                print("Repetition no: " + str(repetition+1))
 
-            # Run main simulation
-            results = main(params)
-            # check_all_parameters(**params)
-            # check_best_parameters(**params)
+                results = {}
 
-            end = time.time()
-            running_time = end - start
-            print("Time of simulation:")
-            print(running_time)
+                start = time.time()
+
+                # Run main simulation
+                results = main(params)
+                # check_all_parameters(**params)
+                # check_best_parameters(**params)
+
+                end = time.time()
+                running_time = end - start
+                print("Time of simulation:")
+                print(running_time)
 
 
-            results["N"] = N
-            results["time"] = running_time
-            results["repetition"] = repetition
+                results["N"] = N
+                results["time"] = running_time
+                results["repetition"] = repetition
 
-            if SAVE_RESULTS == True:
-                if CONSTANT_OFFLOADING:
-                    constant_str = "_b_constant_" + str(int(results["b"][0]/1e6)) + "_"
-                else:
-                    constant_str = ""
-                outfile = 'saved_runs/results/individual/' + case["users"] + constant_str + "_N_" + str(N) + "_c_" + str(round(cpar,3)) + "_" + str(repetition)
+                if SAVE_RESULTS == True:
+                    if CONSTANT_OFFLOADING:
+                        constant_str = "_b_constant_" + str(round(bpar,3))
+                    else:
+                        constant_str = ""
+                    outfile = 'saved_runs/results/individual/' + case["users"] + constant_str + "_N_" + str(N) + "_c_" + str(round(cpar,3)) + "_" + str(repetition)
 
-                with open(outfile, 'wb') as fp:
-                    dill.dump(results, fp)
+                    with open(outfile, 'wb') as fp:
+                        dill.dump(results, fp)
 
 if GENERATE_FIGURES and not SAVE_FIGS:
     plt.show()

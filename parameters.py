@@ -50,6 +50,8 @@ def set_parameters(case, N):
         Weighting factor that captures sensitivity of players toward losses as compared to gains
     cpar: float
         The parameter used to set the cost for users
+    bpar: float
+        The parameter used to set the initial offloading of users
     c: 1-D array
         Each column repesents the pricing factor for each user
     fixed_transm_rate : float
@@ -85,6 +87,8 @@ def set_parameters(case, N):
     c = cpar * bn/dn * (1 - (1/(tn*en)))
 
     assert c.all() > 0, "c should be positive"
+
+    bpar = 0
 
     fixed_transm_rate = 1*1e9
     fixed_transm_power = 0.1
