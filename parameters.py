@@ -50,7 +50,6 @@ def set_parameters(case, N):
         The transmission power used for the transmission [fixed]
     '''
 
-    e1 = 1
     SAVE_FIGS = False
     ONE_FIGURE = False
     GENERATE_FIGURES = False
@@ -60,6 +59,8 @@ def set_parameters(case, N):
     SAVE_RESULTS = True
 
     CONSTANT_OFFLOADING = False
+
+    e1 = 10000
 
     an = 0.2
     kn = 1.2
