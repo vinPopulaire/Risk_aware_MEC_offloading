@@ -28,9 +28,6 @@ Ns = [25]
 # cpars = np.linspace(0.1,0.9,33)
 cpars = [0.5]
 
-# if bpars is -1 we don't want constant offloading
-bpars = [-1] if CONSTANT_OFFLOADING else [-1]
-
 for N in Ns:
     # Set random parameter in order to generate the same parameters
     print("Generating new parameters")
@@ -46,13 +43,16 @@ for N in Ns:
 
         print("Cost parameter: "+ str(params["cpar"]))
 
+        # if bpars is -1 we don't want constant offloading
+        bpars = [-1,0,0.5,1] if params["CONSTANT_OFFLOADING"] else [-1]
+
         while bpars:
             bpar = bpars.pop()
             params["bpar"] = bpar
 
             # if bpar is -1 then we don't want constant offloading
             if bpar == -1:
-                CONSTANT_OFFLOADING = False
+                params["CONSTANT_OFFLOADING"] = False
                 params["bpar"] = 0
 
             for repetition in range(1):
@@ -77,8 +77,8 @@ for N in Ns:
                 results["time"] = running_time
                 results["repetition"] = repetition
 
-                if SAVE_RESULTS == True:
-                    if CONSTANT_OFFLOADING:
+                if params["SAVE_RESULTS"] == True:
+                    if params["CONSTANT_OFFLOADING"]:
                         constant_str = "_b_constant_" + str(round(bpar,3))
                     else:
                         constant_str = ""
@@ -87,5 +87,5 @@ for N in Ns:
                     with open(outfile, 'wb') as fp:
                         dill.dump(results, fp)
 
-if GENERATE_FIGURES and not SAVE_FIGS:
+if params["GENERATE_FIGURES"] and not params["SAVE_FIGS"]:
     plt.show()

@@ -5,16 +5,6 @@ Parameters of the simulation
 import numpy as np
 import dill
 
-SAVE_FIGS = False
-ONE_FIGURE = False
-GENERATE_FIGURES = True
-GENERATE_CONVERGING_FIGURES = True
-LOAD_SAVED_PARAMETERS = False
-SAVE_PARAMETERS = False
-SAVE_RESULTS = False
-
-CONSTANT_OFFLOADING = False
-
 def set_parameters(case, N):
     '''
     Sets the parameters used in the simulation
@@ -61,6 +51,15 @@ def set_parameters(case, N):
     '''
 
     e1 = 1
+    SAVE_FIGS = False
+    ONE_FIGURE = False
+    GENERATE_FIGURES = False
+    GENERATE_CONVERGING_FIGURES = False
+    LOAD_SAVED_PARAMETERS = False
+    SAVE_PARAMETERS = False
+    SAVE_RESULTS = True
+
+    CONSTANT_OFFLOADING = False
 
     an = 0.2
     kn = 1.2

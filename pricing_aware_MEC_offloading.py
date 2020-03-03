@@ -39,7 +39,7 @@ def main(params):
     while not converged:
 
         # if constant offloading, just calculate the expected utility for the specified offloading amount
-        if CONSTANT_OFFLOADING:
+        if params["CONSTANT_OFFLOADING"]:
             expected_utility = np.empty_like(b)
             for i in range(len(b)):
                 expected_utility[i] = -utility_function(b[i], i, b, **params)
@@ -60,11 +60,11 @@ def main(params):
 
     user_energy = calculate_user_energy(b, PoF_converging[-1], **params)
 
-    if GENERATE_CONVERGING_FIGURES: plot_b_converging(b_converging)
-    if GENERATE_CONVERGING_FIGURES: plot_expected_utility_converging(expected_utility_converging)
-    if GENERATE_CONVERGING_FIGURES: plot_pricing_converging(pricing_converging)
-    if GENERATE_CONVERGING_FIGURES: plot_PoF_converging(PoF_converging)
-    if GENERATE_CONVERGING_FIGURES: plot_expected_utility_and_pricing_converging(expected_utility_converging, pricing_converging)
+    if params["GENERATE_CONVERGING_FIGURES"]: plot_b_converging(b_converging, params)
+    if params["GENERATE_CONVERGING_FIGURES"]: plot_expected_utility_converging(expected_utility_converging, params)
+    if params["GENERATE_CONVERGING_FIGURES"]: plot_pricing_converging(pricing_converging, params)
+    if params["GENERATE_CONVERGING_FIGURES"]: plot_PoF_converging(PoF_converging, params)
+    if params["GENERATE_CONVERGING_FIGURES"]: plot_expected_utility_and_pricing_converging(expected_utility_converging, pricing_converging, params)
 
     results = {
         "params": params,

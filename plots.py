@@ -9,8 +9,6 @@ import matplotlib.lines as mlines
 from mpl_toolkits.axes_grid1 import host_subplot
 import mpl_toolkits.axisartist as AA
 
-from parameters import SAVE_FIGS, ONE_FIGURE
-
 def setup_plots(suptitle):
 
     '''
@@ -59,7 +57,7 @@ def setup_plots(suptitle):
 
     return fig, ax
 
-def plot_b_converging(b_converging):
+def plot_b_converging(b_converging, params):
     '''
     Plot the data each user is trying to offload till convergence
 
@@ -84,7 +82,7 @@ def plot_b_converging(b_converging):
 
     suptitle = "Data each user is trying to offload in each iteration"
 
-    if ONE_FIGURE == False:
+    if params["ONE_FIGURE"] == False:
         fig, ax = setup_plots(suptitle)
 
     for index, row in enumerate(result):
@@ -104,12 +102,12 @@ def plot_b_converging(b_converging):
     plt.legend(handles=[grey_lines, black_line], loc=1, prop={'size': 24})
 
     path_name = "b_converging"
-    if SAVE_FIGS == True and ONE_FIGURE == False:
+    if params["SAVE_FIGS"] == True and params["ONE_FIGURE"] == False:
         plt.savefig("plots/" + path_name + ".png")
     else:
         plt.show(block=False)
 
-def plot_expected_utility_converging(expected_utility_converging):
+def plot_expected_utility_converging(expected_utility_converging, params):
     '''
     Plot the expected utility of each user till convergence
 
@@ -134,7 +132,7 @@ def plot_expected_utility_converging(expected_utility_converging):
 
     suptitle = "Expected utility of each user in each iteration"
 
-    if ONE_FIGURE == False:
+    if params["ONE_FIGURE"] == False:
         fig, ax = setup_plots(suptitle)
 
     for index, row in enumerate(result):
@@ -154,12 +152,12 @@ def plot_expected_utility_converging(expected_utility_converging):
     plt.legend(handles=[grey_lines, black_line], loc=1, prop={'size': 24})
 
     path_name = "expected_utility"
-    if SAVE_FIGS == True and ONE_FIGURE == False:
+    if params["SAVE_FIGS"] == True and params["ONE_FIGURE"] == False:
         plt.savefig("plots/" + path_name + ".png")
     else:
         plt.show(block=False)
 
-def plot_pricing_converging(pricing_converging):
+def plot_pricing_converging(pricing_converging, params):
     '''
     Plot the pricing set for each user till convergence
 
@@ -184,7 +182,7 @@ def plot_pricing_converging(pricing_converging):
 
     suptitle = "Pricing each user in each iteration"
 
-    if ONE_FIGURE == False:
+    if params["ONE_FIGURE"] == False:
         fig, ax = setup_plots(suptitle)
 
     plt.ticklabel_format(style='sci', axis='y', scilimits=(7,7))
@@ -206,12 +204,12 @@ def plot_pricing_converging(pricing_converging):
     plt.legend(handles=[grey_lines, black_line], loc=1, prop={'size': 24})
 
     path_name = "pricing"
-    if SAVE_FIGS == True and ONE_FIGURE == False:
+    if params["SAVE_FIGS"] == True and params["ONE_FIGURE"] == False:
         plt.savefig("plots/" + path_name + ".png")
     else:
         plt.show(block=False)
 
-def plot_PoF_converging(PoF_converging):
+def plot_PoF_converging(PoF_converging, params):
     '''
     Plot the probability of failure of MEC server till convergence
 
@@ -235,7 +233,7 @@ def plot_PoF_converging(PoF_converging):
 
     suptitle = "Probability of failure of MEC server in each iteration"
 
-    if ONE_FIGURE == False:
+    if params["ONE_FIGURE"] == False:
         fig, ax = setup_plots(suptitle)
 
     line = plt.plot(result, lw=4, color='k')
@@ -244,12 +242,12 @@ def plot_PoF_converging(PoF_converging):
     plt.ylabel('PoF', fontweight='normal')
 
     path_name = "PoF"
-    if SAVE_FIGS == True and ONE_FIGURE == False:
+    if params["SAVE_FIGS"] == True and params["ONE_FIGURE"] == False:
         plt.savefig("plots/" + path_name + ".png")
     else:
         plt.show(block=False)
 
-def plot_expected_utility_and_pricing_converging(expected_utility_converging, pricing_converging):
+def plot_expected_utility_and_pricing_converging(expected_utility_converging, pricing_converging, params):
     '''
     Plot the average explitic utility and pricing of users till convergence
 
@@ -279,7 +277,7 @@ def plot_expected_utility_and_pricing_converging(expected_utility_converging, pr
 
     suptitle = "Average expected utility and expected pricing for each user in each iteration"
 
-    if ONE_FIGURE == False:
+    if params["ONE_FIGURE"] == False:
         plt.rc('font', family='serif')
         plt.rc('font', size=44)
         plt.rc('xtick', labelsize='x-small')
@@ -310,7 +308,7 @@ def plot_expected_utility_and_pricing_converging(expected_utility_converging, pr
     host.legend(loc=1, prop={'size': 24})
 
     path_name = "expected_utility_and_pricing"
-    if SAVE_FIGS == True and ONE_FIGURE == False:
+    if params["SAVE_FIGS"] == True and params["ONE_FIGURE"] == False:
         plt.savefig("plots/" + path_name + ".png")
     else:
         plt.show(block=False)
