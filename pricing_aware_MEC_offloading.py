@@ -65,6 +65,7 @@ def main(params):
     if GENERATE_CONVERGING_FIGURES: plot_expected_utility_and_pricing_converging(expected_utility_converging, pricing_converging)
 
     results = {
+        "params": params,
         "b": b,
         "expected_utility": expected_utility,
         "iterations": iterations + 1, # add 1 to show the number of iterations
