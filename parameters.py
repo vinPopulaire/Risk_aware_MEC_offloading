@@ -62,9 +62,6 @@ def set_parameters(case, N):
 
     e1 = 10000
 
-    an = 0.2
-    kn = 1.2
-
     if case["users"] == "homo":
         bn = 10*1e6 * np.ones(N) + np.random.uniform(-1, 1, size=N) * 1e6
         dn = 8*1e9 * np.ones(N) + np.random.uniform(-1,1, size=N) * 1e9
@@ -72,12 +69,19 @@ def set_parameters(case, N):
         fn = 6e9 * np.ones(N) + np.random.uniform(-1,1, size=N) * 1e9
         gn = 4e-9 * np.ones(N) + np.random.uniform(-1,1, size=N) * 1e-9
 
+        an = 0.2
+        kn = 1.2
+
     if case["users"] == "hetero":
-        bn = 1e6 * (np.random.uniform(0, 9, size=N) + 1)
+        bn = 10*1e6 * np.ones(N)
         dn = 8*1e9 * np.ones(N)
 
         fn = 6e9 * np.ones(N)
         gn = 4e-9 * np.ones(N)
+
+        # TODO change to heterogeneous users
+        an = 0.2
+        kn = 1.2
 
     tn = dn/fn
     en = gn*dn
