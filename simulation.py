@@ -44,15 +44,15 @@ for N in Ns:
 
     for an in ans:
 
-        params["an"] = an
+        params["an"] = an * np.ones(N)
 
-        print("Sensitivity an: " + str(params["an"]))
+        print("Sensitivity an: " + str(params["an"][0]))
 
         for kn in kns:
 
-            params["kn"] = kn
+            params["kn"] = kn * np.ones(N)
 
-            print("Sensitivity kn: " + str(params["kn"]))
+            print("Sensitivity kn: " + str(params["kn"][0]))
 
             for cpar in cpars:
 

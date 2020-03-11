@@ -77,9 +77,9 @@ def utility_function(x, i, b, dn, bn, an, kn, c, tn, en, **params):
 
     Pr = dt**2
 
-    ROR = (2-math.exp(dt-1) - 1/(tn[i]*en[i]) - c[i]*dn[i]/bn[i])**an
+    ROR = (2-math.exp(dt-1) - 1/(tn[i]*en[i]) - c[i]*dn[i]/bn[i])**an[i]
 
-    expected_utility = x**an * (ROR * (1 - Pr) - kn * (1/(tn[i]*en[i]) + c[i]*dn[i]/bn[i])**an * Pr)
+    expected_utility = x**an[i] * (ROR * (1 - Pr) - kn[i] * (1/(tn[i]*en[i]) + c[i]*dn[i]/bn[i])**an[i] * Pr)
 
     # return minus the utility because we will to use a minimization optimization even
     # though we want to maximize the utility

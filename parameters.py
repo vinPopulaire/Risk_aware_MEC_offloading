@@ -34,9 +34,9 @@ def set_parameters(case, N):
         Energy to process the data locally by each user
     e1: float
         Error for user offloading convergence
-    an: float
+    an: 1-D array
         Parameter of prospect theory utility
-    kn: float
+    kn: 1-D array
         Weighting factor that captures sensitivity of players toward losses as compared to gains
     cpar: float
         The parameter used to set the cost for users
@@ -69,8 +69,8 @@ def set_parameters(case, N):
         fn = 6e9 * np.ones(N) + np.random.uniform(-1,1, size=N) * 1e9
         gn = 4e-9 * np.ones(N) + np.random.uniform(-1,1, size=N) * 1e-9
 
-        an = 0.2
-        kn = 1.2
+        an = 0.2 * np.ones(N)
+        kn = 1.2 * np.ones(N)
 
     if case["users"] == "hetero":
         bn = 10*1e6 * np.ones(N)
@@ -80,8 +80,8 @@ def set_parameters(case, N):
         gn = 4e-9 * np.ones(N)
 
         # TODO change to heterogeneous users
-        an = 0.2
-        kn = 1.2
+        an = 0.2 * np.ones(N)
+        kn = 1.2 * np.ones(N)
 
     tn = dn/fn
     en = gn*dn
