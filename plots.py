@@ -236,7 +236,7 @@ def plot_PoF_converging(PoF_converging, params):
     if params["ONE_FIGURE"] == False:
         fig, ax = setup_plots(suptitle)
 
-    line = plt.plot(result, lw=4, color='k')
+    line = plt.plot(result, '--', lw=4, color='k')
 
     plt.xlabel('iterations', fontweight='normal')
     plt.ylabel('PoF', fontweight='normal')
@@ -267,6 +267,12 @@ def plot_expected_utility_and_pricing_converging(expected_utility_converging, pr
     Plot
 
     '''
+    # colors = ['k', '0.5']
+    # line_types = ['--', ':']
+
+    colors = ['darkorange', 'darkgreen']
+    line_types = ['-', '-']
+
     result1 = expected_utility_converging
     result2 = pricing_converging
 
@@ -295,7 +301,7 @@ def plot_expected_utility_and_pricing_converging(expected_utility_converging, pr
 
     average1 = np.mean(result1, axis=0)
 
-    line = host.plot(average1, '--', lw=4, color='k', label='expected utility')
+    line1, = host.plot(average1, line_types[0], lw=4, color=colors[0], label='expected utility')
 
     host.set_xlabel('iterations', fontweight='normal')
     host.set_ylabel('Average Expected Utility', fontweight='normal')
@@ -303,7 +309,10 @@ def plot_expected_utility_and_pricing_converging(expected_utility_converging, pr
     ax2.set_ylabel('Average Pricing', fontweight='normal')
 
     average2 = np.mean(result2, axis=0)
-    line = ax2.plot(average2, ':', lw=4, color='0.5', label="pricing")
+    line2, = ax2.plot(average2, line_types[1], lw=4, color=colors[1], label="pricing")
+
+    # host.axis["left"].label.set_color(line1.get_color())
+    # ax2.axis["right"].label.set_color(line2.get_color())
 
     host.legend(loc=1, prop={'size': 24})
 
