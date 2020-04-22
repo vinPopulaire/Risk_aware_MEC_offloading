@@ -14,8 +14,9 @@ pickleshare==0.7.5
 prompt-toolkit==2.0.9
 ptyprocess==0.6.0
 Pygments==2.4.2
-pyparsing==2.4.1
+pyparsing==2.4.7
 python-dateutil==2.8.0
+scipy==1.4.1
 six==1.12.0
 traitlets==4.3.2
 wcwidth==0.1.7
