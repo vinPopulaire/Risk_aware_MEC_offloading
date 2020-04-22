@@ -1,4 +1,4 @@
-# Risk_aware
+# Risk_aware_MEC_offloading
 Code for generating Data Offloading in UAV-assisted Multi-access Edge Computing Systems: A Resource-based Pricing and User Risk-awareness Approach paper's simulation results.
 
 ## Abstract
@@ -28,7 +28,7 @@ Create folders inside project root folder to store parameters and results
 mkdir saved_runs saved_runs/parameters saved_runs/results saved_runs/results/individual
 ```
 
-(optional) Create subfolders inside individula runs to store results in such a way that the plot function to generate the results of the paper works
+(Optional) Create subfolders inside individual to store results in such a way that the create_plots function to generate the results of the paper works
 ```
 cd saved_runs/results/individual
 mkdir different\ an different\ c different \kn different\ N different\ N\ an different\ N\ kn different\ offloading different\ type
@@ -38,7 +38,7 @@ mkdir different\ an different\ c different \kn different\ N different\ N\ an dif
 
 Set general parameters of the simulation (ATTENTION some of the parameters are redifined inside the simulation.py)
 ```
-vim paremeters.py
+vim parameters.py
 ```
 
 Run simulation
@@ -46,18 +46,18 @@ Run simulation
 ipython simulation.py
 ```
 
-## Create plots found in the paper
+## Create plots that appear in the paper
 
-You can play with the parameters used in the simulation in order to see how the model reacts to changes on each parameter. In order to do so, you can specify the list of values for the specified parameter (or just uncomment the lists provided).
+You can play with the parameters used in the simulation in order to see how the model reacts to changes of each parameter. In order to do so, you can specify the list of values for the specified parameter (or just uncomment the lists provided).
 ```
 vim simulation.py
 ```
 
-In order to create the plots found in the paper you have to populate the results folders. When a simulation runs, the results are saved inside the results/individual folder. After you run a simulation with a varying parameter, you have to manually move the results inside the corresponding folder.
+In order to create the plots found in the paper you have to populate the results folders. When a simulation runs, the results are saved inside the saved_runs/results/individual folder. After you run a simulation with a varying parameter, you have to manually move the results inside the corresponding folder.
 
 ### Example
 If you want to run a simulation with varying costs, you have to:
-- set SAVE_PARAMETER = True in parameters.py
+- set SAVE_RESULTS = True in parameters.py
 - uncomment cpars = np.linspace(0.1,0.9,33) and comment cpars = [0.5] in simulation.py
 - run simulation.py
 - manually move generated results in saved_runs/results/individual inside the different c folder
