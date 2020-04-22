@@ -32,6 +32,7 @@ ans = [0.2]
 # ans = np.linspace(0.1,1,10)
 
 kns = [1.2]
+# kns = [0.31]
 # kns = np.linspace(0.2,2,10)
 
 for N in Ns:
