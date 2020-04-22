@@ -31,7 +31,7 @@ def setup_plots(suptitle):
     plt.rc('xtick', labelsize='x-small')
     plt.rc('ytick', labelsize='x-small')
 
-    plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0), useMathText=True)
 
     fig, ax = plt.subplots(1, 1, figsize=(16, 12))
     # fig.suptitle(suptitle)
@@ -96,6 +96,8 @@ def plot_b_converging(b_converging, params):
 
     plt.xlabel('iterations', fontweight='normal')
     plt.ylabel('Amount of Offloaded Data [bits]', fontweight='normal')
+
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(7,7), useMathText=True)
 
     grey_lines = mlines.Line2D([], [], lw = 2, color='0.5', label='each user')
     black_line = mlines.Line2D([], [], lw = 4, color='k', label='average')
@@ -185,7 +187,7 @@ def plot_pricing_converging(pricing_converging, params):
     if params["ONE_FIGURE"] == False:
         fig, ax = setup_plots(suptitle)
 
-    plt.ticklabel_format(style='sci', axis='y', scilimits=(7,7))
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(7,7), useMathText=True)
 
     for index, row in enumerate(result):
         # # display only some of the users on the plot
@@ -288,7 +290,7 @@ def plot_expected_utility_and_pricing_converging(expected_utility_converging, pr
         plt.rc('font', size=44)
         plt.rc('xtick', labelsize='x-small')
         plt.rc('ytick', labelsize='x-small')
-        plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+        plt.ticklabel_format(style='sci', axis='y', scilimits=(0,0), useMathText=True)
 
         fig = plt.figure(figsize=(16,12))
 
@@ -297,7 +299,7 @@ def plot_expected_utility_and_pricing_converging(expected_utility_converging, pr
 
     ax2 = host.twinx() # instantiate a second axes that shares the same x-axis
     ax2.axis["right"].toggle(all=True)
-    ax2.ticklabel_format(style='sci', axis='y', scilimits=(7,7))
+    ax2.ticklabel_format(style='sci', axis='y', scilimits=(7,7), useMathText=True)
 
     average1 = np.mean(result1, axis=0)
 
