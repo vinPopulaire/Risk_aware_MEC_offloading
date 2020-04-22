@@ -50,10 +50,10 @@ def set_parameters(case, N):
         The transmission power used for the transmission [fixed]
     '''
 
-    SAVE_FIGS = False
+    SAVE_FIGS = True
     ONE_FIGURE = False
-    GENERATE_FIGURES = False
-    GENERATE_CONVERGING_FIGURES = False
+    GENERATE_FIGURES = True
+    GENERATE_CONVERGING_FIGURES = True
     LOAD_SAVED_PARAMETERS = False
     SAVE_PARAMETERS = False
     SAVE_RESULTS = True
