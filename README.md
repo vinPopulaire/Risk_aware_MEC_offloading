@@ -1,5 +1,5 @@
 # Risk_aware
-Code for generating Data Offloading in UAV-assisted Multi-access Edge Computing Systems: A Resource-based Pricing and User Risk-awareness Approach paper's simulation results.
+Code for generating Data Offloading in UAV-assisted Multi-access Edge Computing Systems: A Resource-based Pricing and User Risk-awareness Approach paper's simulation results. https://www.mdpi.com/1424-8220/20/8/2434/pdf
 
 ## Abstract
 
