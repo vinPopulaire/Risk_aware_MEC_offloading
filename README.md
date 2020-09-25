@@ -23,9 +23,9 @@ Install dependacies
 pip install -r requirements.txt
 ```
 
-Create folders inside project root folder to store parameters and results
+Create folders inside project root folder to store parameters, results and plots
 ```
-mkdir saved_runs saved_runs/parameters saved_runs/results saved_runs/results/individual
+mkdir plots saved_runs saved_runs/parameters saved_runs/results saved_runs/results/individual
 ```
 
 (Optional) Create subfolders inside individual to store results in such a way that the create_plots function to generate the results of the paper works
