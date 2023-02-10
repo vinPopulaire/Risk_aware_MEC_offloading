@@ -2,7 +2,7 @@ backcall==0.1.0
 cycler==0.10.0
 decorator==4.4.0
 dill==0.3.0
-ipython==7.16.3
+ipython==8.10.0
 ipython-genutils==0.2.0
 jedi==0.14.1
 kiwisolver==1.1.0
